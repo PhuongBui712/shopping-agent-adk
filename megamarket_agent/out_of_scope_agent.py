@@ -1,9 +1,11 @@
 from typing_extensions import override, AsyncGenerator
 
 from google.genai import types
-from google.adk.agents import BaseAgent
+from google.adk.agents import BaseAgent, Agent
 from google.adk.events import Event
 from google.adk.agents.invocation_context import InvocationContext
+
+from .prompt import OUT_OF_SCOPE_AGENT
 
 DEFAULT_MSG = """
 ### ***Bạn đã vi phạm chính sách sử dụng trợ lý ảo thông minh của chúng tôi, trợ lý ảo chỉ có thể hỗ trợ bạn các thông tin về sản phẩm và đặt hàng, \
@@ -22,7 +24,12 @@ class OutOfScopeAgent(BaseAgent):
         )
 
 
-out_of_scope_agent = OutOfScopeAgent(
+out_of_scope_agent = Agent(
+    model="gemini-2.0-flash",
     name="out_of_scope_agent",
-    description="An agent designed to handle interactions that fall outside the predefined scope of product inquiries and order placements. It ensures users are informed about the limitations of the virtual assistant's capabilities and encourages compliance with usage policies.",
+    description=(
+        "An agent designed to handle interactions that fall outside the predefined scope of product inquiries and order placements. "
+        "It ensures users are informed about the limitations of the virtual assistant's capabilities and encourages compliance with usage policies."
+    ),
+    instruction=OUT_OF_SCOPE_AGENT
 )

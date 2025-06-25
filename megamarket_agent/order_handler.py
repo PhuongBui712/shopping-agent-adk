@@ -119,7 +119,7 @@ class OrderHandler:
                 total = (
                     product["quantity"]
                     * data_source["original_price"]
-                    * ((100 - data_source["discount"]) / 100)
+                    * ((100 - float(data_source.get("discount", 0) or 0.0)) / 100)
                 )
 
                 products.append(

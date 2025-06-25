@@ -11,5 +11,5 @@ root_agent = Agent(
     description="An intelligent assistant designed to help customers with product inquiries and order placement in the Mega Market supermarket system. It ensures efficient and polite interactions, providing clear instructions and maintaining language consistency with the customer.",
     instruction=AGENT_PROMPT,
     tools=[search_product, prepare_order, create_order, get_order],
-    sub_agents=[out_of_scope_agent],
+    # sub_agents=[out_of_scope_agent],
 )
